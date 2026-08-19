@@ -64,7 +64,7 @@ There is no smoke tests.
 To debug Operator in VSCode you can use `Launch Kafka Operator` configuration which is already defined in 
 `.vscode/launch.json` file.
 
-The developer should configure environment variables: 
+The developer should configure environment variables:
 
 - `KUBECONFIG` - developer should **need to define** `KUBECONFIG` environment variable
   which should contains path to the kube-config file. It can be defined on configuration level
@@ -77,7 +77,7 @@ The developer should configure environment variables:
 To debug Operator in VSCode you can use `Launch Kafka-Services Operator` configuration which is already defined in 
 `.vscode/launch.json` file.
 
-The developer should configure environment variables: 
+The developer should configure environment variables:
 
 - `KUBECONFIG` - developer should **need to define** `KUBECONFIG` environment variable
   which should contains path to the kube-config file. It can be defined on configuration level
