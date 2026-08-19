@@ -20,11 +20,11 @@ The following topics are covered in this chapter:
 
 ## Repository structure
 
-* `./charts` - directory with HELM charts for Kafka and Kafka-related components.
-* `./demo` - directory with `docker-compose` setup to run Kafka and related services locally.
-* `./docs` - directory containing project documentation.
-* `./integration-tests` - directory with Robot Framework integration test cases.
-* `./operator` - directory with operator source code used for running Kafka and related services.
+- `./charts` - directory with HELM charts for Kafka and Kafka-related components.
+- `./demo` - directory with `docker-compose` setup to run Kafka and related services locally.
+- `./docs` - directory containing project documentation.
+- `./integration-tests` - directory with Robot Framework integration test cases.
+- `./operator` - directory with operator source code used for running Kafka and related services.
 
 ## How to start
 
@@ -66,11 +66,11 @@ To debug Operator in VSCode you can use `Launch Kafka Operator` configuration wh
 
 The developer should configure environment variables: 
 
-* `KUBECONFIG` - developer should **need to define** `KUBECONFIG` environment variable
+- `KUBECONFIG` - developer should **need to define** `KUBECONFIG` environment variable
   which should contains path to the kube-config file. It can be defined on configuration level
   or on the level of user's environment variables.
-* `WATCH_NAMESPACE` - namespace, in which custom resources should be proceeded.
-* `OPERATOR_NAMESPACE` - namespace, where Kafka should be proceeded.
+- `WATCH_NAMESPACE` - namespace, in which custom resources should be proceeded.
+- `OPERATOR_NAMESPACE` - namespace, where Kafka should be proceeded.
 
 #### Kafka-Services Operator
 
@@ -79,11 +79,11 @@ To debug Operator in VSCode you can use `Launch Kafka-Services Operator` configu
 
 The developer should configure environment variables: 
 
-* `KUBECONFIG` - developer should **need to define** `KUBECONFIG` environment variable
+- `KUBECONFIG` - developer should **need to define** `KUBECONFIG` environment variable
   which should contains path to the kube-config file. It can be defined on configuration level
   or on the level of user's environment variables.
-* `WATCH_NAMESPACE` - namespace, in which custom resources should be proceeded.
-* `OPERATOR_NAMESPACE` - namespace, where Kafka-Services should be proceeded.
+- `WATCH_NAMESPACE` - namespace, in which custom resources should be proceeded.
+- `OPERATOR_NAMESPACE` - namespace, where Kafka-Services should be proceeded.
 
 > **Note:** The `secondaryApiGroup` parameter was added to enable listening to several API groups with the same CR type.
 
@@ -91,9 +91,9 @@ The developer should configure environment variables:
 
 There are no well-defined rules for troubleshooting, as each task is unique, but there are some tips that can do:
 
-* Deploy parameters.
-* Application manifest.
-* Logs from all Kafka and Kafka-Services pods: operators, Kafka and others.
+- Deploy parameters.
+- Application manifest.
+- Logs from all Kafka and Kafka-Services pods: operators, Kafka and others.
 
 Also, developer can take a look on [Troubleshooting guide](/docs/public/troubleshooting.md).
 
@@ -101,16 +101,16 @@ Also, developer can take a look on [Troubleshooting guide](/docs/public/troubles
 
 To keep the component up to date, the following activities should be performed regularly:
 
-* Vulnerabilities fixing.
-* Kafka or Kafka supplementary services upgrade.
-* Bug-fixing, improvement and feature implementation for operator and other related supplementary services.
+- Vulnerabilities fixing.
+- Kafka or Kafka supplementary services upgrade.
+- Bug-fixing, improvement and feature implementation for operator and other related supplementary services.
 
 ## Useful links
 
-* [Installation guide](/docs/public/installation.md) (Helm parameters, including integration tests and ATP Storage).
-* [Troubleshooting guide](/docs/public/troubleshooting.md).
-* [Architecture Guide](/docs/public/architecture.md).
-* [Internal Developer Guide](/docs/internal/developing.md).
+- [Installation guide](/docs/public/installation.md) (Helm parameters, including integration tests and ATP Storage).
+- [Troubleshooting guide](/docs/public/troubleshooting.md).
+- [Architecture Guide](/docs/public/architecture.md).
+- [Internal Developer Guide](/docs/internal/developing.md).
 
 ## AI Agents Information
 
