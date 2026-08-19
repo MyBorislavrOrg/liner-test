@@ -54,7 +54,6 @@ jobs:
         # Full git history is needed to get a proper list of changed files within `super-linter`
         fetch-depth: 0
         persist-credentials: false
-        ref: ${{ inputs.ref }}
     - name: "Apply the common linters configuration"
       run: |
         mkdir -p ./.github/linters
