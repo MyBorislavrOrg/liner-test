@@ -115,8 +115,3 @@ To keep the component up to date, the following activities should be performed r
 ## AI Agents Information
 
 [AGENTS.md](/AGENTS.md)
-
-
-
-
------------------
