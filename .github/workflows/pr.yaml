@@ -7,7 +7,7 @@ on:
       - '**'
 jobs:
   pr:
-    uses: myborislavrorg/qubership-kafka-tests/.github/workflows/re-pr.yaml@main
+    uses: myborislavrorg/reusable-workflows/.github/workflows/re-pr.yaml@main
     with:
       pr_number: ${{ github.event.pull_request.number }}
       type: ${{ github.event.action }}
