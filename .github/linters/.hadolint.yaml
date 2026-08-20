@@ -1,5 +1,0 @@
-failure-threshold: error
-
-ignored:
-  - DL3018
-  - DL3033
