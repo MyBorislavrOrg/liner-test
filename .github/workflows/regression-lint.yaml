@@ -5,7 +5,7 @@ on:
     paths:
       - "config/linters/eslint.config.mjs"
       - "fixtures/**"
-      - ".github/workflows/regression-lint.yml"
+      - ".github/workflows/regression-lint.yaml"
   pull_request:
     paths:
       - "config/linters/eslint.config.mjs"
