@@ -41,6 +41,8 @@ jobs:
           CREATE_LOG_FILE: "true"
           LOG_FILE: super-linter.log # relative to DEFAULT_WORKSPACE, filename only
           LOG_LEVEL: DEBUG
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
       - name: Assert run-lint actually failed
         run: |
@@ -89,6 +91,7 @@ jobs:
           JAVASCRIPT_ES_CONFIG_FILE: eslint.config.mjs
           LINTER_RULES_PATH: config/linters
           LOG_LEVEL: DEBUG
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # No continue-on-error here: a real failure means the fix broke
         # existing green JS/TS/valid-JSON behavior, and the job should fail.
 
