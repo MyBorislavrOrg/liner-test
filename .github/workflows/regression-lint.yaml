@@ -23,9 +23,10 @@ jobs:
   expect-fail-on-malformed-json:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          sparse-checkout: fixtures/json/malformed.json
 
       # No DEFAULT_WORKSPACE override: in GitHub Actions, Super-Linter
       # always operates on GITHUB_WORKSPACE (the runner's mounted
@@ -37,7 +38,7 @@ jobs:
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
           VALIDATE_ALL_CODEBASE: "true"
-          FILTER_REGEX_INCLUDE: "malformed.json"
+        #  FILTER_REGEX_INCLUDE: "malformed.json"
           VALIDATE_JSON: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
@@ -75,16 +76,20 @@ jobs:
   expect-pass-on-valid-fixtures:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          sparse-checkout: |
+            fixtures/json/valid.json
+            fixtures/js/valid.js
+            fixtures/ts/valid.ts
 
       - name: Run Super-Linter against valid fixtures
         id: lint
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
           VALIDATE_ALL_CODEBASE: "true"
-          FILTER_REGEX_INCLUDE: "(valid.json|valid.js|valid.ts)$"
+        #  FILTER_REGEX_INCLUDE: "(valid.json|valid.js|valid.ts)$"
           VALIDATE_JSON: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
