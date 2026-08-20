@@ -1,6 +1,11 @@
 name: Regression - shared lint config JSON validation
 
 on:
+  push:
+    paths:
+      - "config/linters/eslint.config.mjs"
+      - "fixtures/**"
+      - ".github/workflows/regression-lint.yml"
   pull_request:
     paths:
       - "config/linters/eslint.config.mjs"
