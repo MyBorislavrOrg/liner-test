@@ -2,6 +2,7 @@
 import js from "@eslint/js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import nodePlugin from "eslint-plugin-n";
 import jsonc from "eslint-plugin-jsonc";
 
 export default [
@@ -20,6 +21,11 @@ export default [
     },
     plugins: {
       "@typescript-eslint": tseslint,
+      // Rule "n/no-missing-import" needs the "n" plugin registered
+      // explicitly - flat config does not auto-resolve rule prefixes
+      // the way legacy .eslintrc did. eslint-plugin-n ships inside the
+      // Super-Linter image, so this is safe to import directly.
+      n: nodePlugin,
     },
     rules: {
       "no-undef": "warn",
