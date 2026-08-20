@@ -8,11 +8,10 @@ on:
       - ".github/workflows/regression-lint.yml"
   workflow_dispatch: {}
 
-# Pin the exact Super-Linter version used by required run-lint checks.
-# Uses super-linter/super-linter (the action itself, not a raw docker run),
-# same as the shared run-lint workflow.
-env:
-  SUPER_LINTER_VERSION: v8.6.0 # keep in sync with the shared run-lint workflow
+# Super-Linter version is pinned as a literal tag on every `uses:` line
+# below, since GitHub Actions does not evaluate expressions in `uses:`.
+# Keep every occurrence below (and the shared run-lint workflow) in sync -
+# Dependabot/Renovate will bump all matching pins in this file together.
 
 jobs:
   # --- Negative path: malformed JSON must fail --------------------------
@@ -30,7 +29,7 @@ jobs:
       - name: Run Super-Linter against malformed JSON
         id: lint
         continue-on-error: true
-        uses: super-linter/super-linter@${{ env.SUPER_LINTER_VERSION }}
+        uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
           DEFAULT_WORKSPACE: /tmp/neg
           VALIDATE_ALL_CODEBASE: "true"
@@ -80,7 +79,7 @@ jobs:
 
       - name: Run Super-Linter against valid fixtures
         id: lint
-        uses: super-linter/super-linter@${{ env.SUPER_LINTER_VERSION }}
+        uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
           DEFAULT_WORKSPACE: /tmp/pos
           VALIDATE_ALL_CODEBASE: "true"
