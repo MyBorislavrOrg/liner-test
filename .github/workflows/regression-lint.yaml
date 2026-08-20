@@ -37,7 +37,7 @@ jobs:
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
           VALIDATE_ALL_CODEBASE: "true"
-          FILTER_REGEX_INCLUDE: ".*fixtures/json/malformed\\.json$"
+          FILTER_REGEX_INCLUDE: ".*fixtures/json/malformed.json$"
           VALIDATE_JSON: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
