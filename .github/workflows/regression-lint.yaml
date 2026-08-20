@@ -24,30 +24,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Build isolated fixture workspace (JSON only)
-        run: |
-          mkdir -p /tmp/neg/config/linters
-          cp fixtures/json/malformed.json /tmp/neg/malformed.json
-          cp config/linters/eslint.config.mjs /tmp/neg/config/linters/eslint.config.mjs
-
+      # No DEFAULT_WORKSPACE override: in GitHub Actions, Super-Linter
+      # always operates on GITHUB_WORKSPACE (the runner's mounted
+      # checkout) regardless of DEFAULT_WORKSPACE. Instead we scope the
+      # scan to just this fixture via FILTER_REGEX_INCLUDE.
       - name: Run Super-Linter against malformed JSON
         id: lint
         continue-on-error: true
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
-          DEFAULT_WORKSPACE: /tmp/neg
           VALIDATE_ALL_CODEBASE: "true"
+          FILTER_REGEX_INCLUDE: ".*fixtures/json/malformed\\.json$"
           VALIDATE_JSON: "true"
           VALIDATE_JAVASCRIPT_ES: "false"
           VALIDATE_TYPESCRIPT_ES: "false"
           JAVASCRIPT_ES_CONFIG_FILE: eslint.config.mjs
           LINTER_RULES_PATH: config/linters
           CREATE_LOG_FILE: "true"
-          LOG_FILE: super-linter.log # relative to DEFAULT_WORKSPACE, filename only
+          LOG_FILE: super-linter.log # written to ${GITHUB_WORKSPACE}/super-linter.log
           LOG_LEVEL: DEBUG
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
       - name: Assert run-lint actually failed
         run: |
@@ -58,15 +57,17 @@ jobs:
 
       - name: Assert the file was linted, not silently ignored
         run: |
+          LOG="${GITHUB_WORKSPACE}/super-linter.log"
           # Also fail loudly if the ERR_MODULE_NOT_FOUND regression from
-          # eslint.config.mjs (e.g. an unbundled import) resurfaces - that
-          # would make run-lint red for the wrong reason.
-          if grep -qi "no matching configuration was supplied" /tmp/neg/super-linter.log 2>/dev/null; then
+          # eslint.config.mjs (e.g. an unbundled import or an unregistered
+          # plugin) resurfaces - that would make run-lint red for the
+          # wrong reason, not because malformed.json is actually invalid.
+          if grep -qi "no matching configuration was supplied" "$LOG" 2>/dev/null; then
             echo "::error::malformed.json was ignored instead of being linted."
             exit 1
           fi
-          if grep -qi "ERR_MODULE_NOT_FOUND" /tmp/neg/super-linter.log 2>/dev/null; then
-            echo "::error::eslint.config.mjs failed to load (unbundled import?); JSON was not actually linted."
+          if grep -qi "ERR_MODULE_NOT_FOUND\|could not find plugin" "$LOG" 2>/dev/null; then
+            echo "::error::eslint.config.mjs failed to load; JSON was not actually linted."
             exit 1
           fi
 
@@ -75,21 +76,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Build isolated fixture workspace (valid files)
-        run: |
-          mkdir -p /tmp/pos/config/linters
-          cp fixtures/json/valid.json /tmp/pos/valid.json
-          cp fixtures/js/valid.js /tmp/pos/valid.js
-          cp fixtures/ts/valid.ts /tmp/pos/valid.ts
-          cp config/linters/eslint.config.mjs /tmp/pos/config/linters/eslint.config.mjs
+        with:
+          fetch-depth: 0
 
       - name: Run Super-Linter against valid fixtures
         id: lint
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
-          DEFAULT_WORKSPACE: /tmp/pos
           VALIDATE_ALL_CODEBASE: "true"
+          FILTER_REGEX_INCLUDE: ".*fixtures/(json/valid\\.json|js/valid\\.js|ts/valid\\.ts)$"
           VALIDATE_JSON: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
