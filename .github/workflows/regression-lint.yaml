@@ -26,8 +26,8 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          sparse-checkout: fixtures/json/malformed.json
-
+      - run: |
+          rm -rf fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
       # No DEFAULT_WORKSPACE override: in GitHub Actions, Super-Linter
       # always operates on GITHUB_WORKSPACE (the runner's mounted
       # checkout) regardless of DEFAULT_WORKSPACE. Instead we scope the
@@ -79,11 +79,8 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          sparse-checkout: |
-            fixtures/json/valid.json
-            fixtures/js/valid.js
-            fixtures/ts/valid.ts
-
+      - run: |
+          rm -rf fixtures/json/malformed.json
       - name: Run Super-Linter against valid fixtures
         id: lint
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
