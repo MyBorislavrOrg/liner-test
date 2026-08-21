@@ -31,13 +31,13 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      # - run: |
-      #     rm -f fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
+      - run: |
+          rm -f fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
 
       - name: Run Super-Linter against malformed JSON
         id: lint
         continue-on-error: true
-        uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
+        uses: super-linter/super-linter@v8.1.0 # keep in sync with the shared run-lint workflow's pin
         env:
           VALIDATE_ALL_CODEBASE: "true"
           VALIDATE_JSON: "true"
@@ -94,7 +94,7 @@ jobs:
 
       - name: Run Super-Linter against valid fixtures
         id: lint
-        uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
+        uses: super-linter/super-linter@v8.1.0 # keep in sync with the shared run-lint workflow's pin
         env:
           VALIDATE_ALL_CODEBASE: "true"
           VALIDATE_JSON: "true"
