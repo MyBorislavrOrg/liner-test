@@ -29,6 +29,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+          fetch-depth: 0
 
       # - run: |
       #     rm -f fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
