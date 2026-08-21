@@ -25,12 +25,13 @@ jobs:
           persist-credentials: false
           path: netcracker.github
 
-      - run: |
-          rm -f fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
 
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+
+      - run: |
+          rm -f fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
 
       - name: Run Super-Linter against malformed JSON
         id: lint
