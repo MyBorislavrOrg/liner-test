@@ -13,11 +13,6 @@ on:
       - ".github/workflows/regression-lint.yaml"
   workflow_dispatch: {}
 
-# Super-Linter version is pinned as a literal tag on every `uses:` line
-# below, since GitHub Actions does not evaluate expressions in `uses:`.
-# Keep every occurrence below (and the shared run-lint workflow) in sync -
-# Dependabot/Renovate will bump all matching pins in this file together.
-
 jobs:
   # --- Negative path: malformed JSON must fail --------------------------
   expect-fail-on-malformed-json:
@@ -28,17 +23,13 @@ jobs:
           fetch-depth: 0
       - run: |
           rm -rf fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
-      # No DEFAULT_WORKSPACE override: in GitHub Actions, Super-Linter
-      # always operates on GITHUB_WORKSPACE (the runner's mounted
-      # checkout) regardless of DEFAULT_WORKSPACE. Instead we scope the
-      # scan to just this fixture via FILTER_REGEX_INCLUDE.
+
       - name: Run Super-Linter against malformed JSON
         id: lint
         continue-on-error: true
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
           VALIDATE_ALL_CODEBASE: "true"
-        #  FILTER_REGEX_INCLUDE: "malformed.json"
           VALIDATE_JSON: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
@@ -86,7 +77,6 @@ jobs:
         uses: super-linter/super-linter@v8.7.0 # keep in sync with the shared run-lint workflow's pin
         env:
           VALIDATE_ALL_CODEBASE: "true"
-        #  FILTER_REGEX_INCLUDE: "(valid.json|valid.js|valid.ts)$"
           VALIDATE_JSON: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
@@ -94,8 +84,6 @@ jobs:
           LINTER_RULES_PATH: config/linters
           LOG_LEVEL: DEBUG
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # No continue-on-error here: a real failure means the fix broke
-        # existing green JS/TS/valid-JSON behavior, and the job should fail.
 
   # --- Gate: both expectations must hold ---------------------------------
   regression-gate:
