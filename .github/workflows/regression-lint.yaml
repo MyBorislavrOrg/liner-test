@@ -26,6 +26,7 @@ jobs:
           path: netcracker.github
 
       - run: |
+          mkdir -p fixtures/json
           echo <<EOF > fixtures/json/malformed.json
           {
             "foo": "bar",
@@ -87,18 +88,21 @@ jobs:
           path: netcracker.github
 
       - run: |
+          mkdir -p fixtures/json
           echo <<EOF > fixtures/json/valid.json
           {
             "foo": "bar",
             "value": 1
           }
           EOF
+          mkdir -p fixtures/js
           echo <<EOF > fixtures/js/valid.js
           const foo = "bar";  // eslint-disable-line no-unused-vars
           export function add(a, b) {
             return a + b;
           }
           EOF
+          mkdir -p fixtures/ts
           echo <<EOF > fixtures/ts/valid.ts
           export function add(a: number, b: number): number {
             return a + b;
