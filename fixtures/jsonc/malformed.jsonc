@@ -1,5 +1,5 @@
 {
   "name": "example",
-  "enabled": true
-  "count": 1
+  "enabled": true,
+  "count": 1,
 }
