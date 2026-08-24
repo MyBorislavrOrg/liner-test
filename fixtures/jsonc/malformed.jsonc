@@ -1,5 +1,6 @@
 {
-  "name": "example",
+  // comments are allowed
+  "name": 'example',
   "enabled": true,
   "count": 1,
 }

@@ -1,6 +1,6 @@
 {
   // comments are allowed
-  greeting: "hello",
+  greeting: 'hello',
   count: 42,
   enabled: true,
   items: ["a", "b", "c"],
