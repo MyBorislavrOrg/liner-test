@@ -32,7 +32,8 @@ jobs:
           fetch-depth: 0
 
       - run: |
-          rm -f fixtures/json/valid.json fixtures/js/valid.js fixtures/ts/valid.ts
+          rm -f fixtures/js/valid.js fixtures/ts/valid.ts
+          rm -f fixtures/json/valid.json fixtures/json5/valid.json5 fixtures/jsonc/valid.jsonc
 
       - name: Run Super-Linter against malformed JSON
         id: lint
@@ -41,6 +42,8 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: "true"
           VALIDATE_JSON: "true"
+          VALIDATE_JSON5: "true"
+          VALIDATE_JSONC: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
           JAVASCRIPT_ES_CONFIG_FILE: eslint.config.mjs
@@ -91,6 +94,8 @@ jobs:
 
       - run: |
          rm -f fixtures/json/malformed.json
+         rm -f fixtures/json5/malformed.json5
+         rm -f fixtures/jsonc/malformed.jsonc
 
       - name: Run Super-Linter against valid fixtures
         id: lint
@@ -98,6 +103,8 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: "true"
           VALIDATE_JSON: "true"
+          VALIDATE_JSON5: "true"
+          VALIDATE_JSONC: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
           JAVASCRIPT_ES_CONFIG_FILE: eslint.config.mjs
