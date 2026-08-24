@@ -39,16 +39,14 @@ export default [
   ...jsonc.configs["flat/recommended-with-jsonc"],
 
   {
-    files: ["**/*.json"],
+    files: ["**/*.jsonc"],
     rules: {
-      "jsonc/no-comments": "error",
-      "jsonc/quote-props": "error",
-      "jsonc/comma-dangle": "error",
+      "jsonc/no-comments": "off",
     },
   },
 
   {
-    files: ["**/*.json5", "**/*.jsonc"],
+    files: ["**/*.json5"],
     rules: {
       "jsonc/no-comments": "off",
       "jsonc/quote-props": "off",
