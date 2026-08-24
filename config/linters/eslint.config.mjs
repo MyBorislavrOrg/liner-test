@@ -35,4 +35,6 @@ export default [
   // since Super-Linter loads this single config file for all three).
 
   ...jsonc.configs["flat/recommended-with-json"],
+  ...jsonc.configs["flat/recommended-with-json5"],
+  ...jsonc.configs["flat/recommended-with-jsonc"],
 ];
