@@ -42,12 +42,11 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: "true"
           VALIDATE_JSON: "true"
-          VALIDATE_JSON5: "true"
           VALIDATE_JSONC: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
           JAVASCRIPT_ES_CONFIG_FILE: eslint.config.mjs
-          LINTER_RULES_PATH: netcracker.github/config/linters
+          LINTER_RULES_PATH: config/linters # netcracker.github/config/linters
           CREATE_LOG_FILE: "true"
           LOG_FILE: super-linter.log # written to ${GITHUB_WORKSPACE}/super-linter.log
           LOG_LEVEL: DEBUG
@@ -103,12 +102,11 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: "true"
           VALIDATE_JSON: "true"
-          VALIDATE_JSON5: "true"
           VALIDATE_JSONC: "true"
           VALIDATE_JAVASCRIPT_ES: "true"
           VALIDATE_TYPESCRIPT_ES: "true"
           JAVASCRIPT_ES_CONFIG_FILE: eslint.config.mjs
-          LINTER_RULES_PATH: netcracker.github/config/linters
+          LINTER_RULES_PATH: config/linters # netcracker.github/config/linters
           LOG_LEVEL: DEBUG
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
