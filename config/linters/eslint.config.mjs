@@ -29,28 +29,28 @@ export default [
     },
   },
 
-  // JSON support via eslint-plugin-jsonc, which ships inside the
-  // Super-Linter image (unlike @eslint/json, which is not bundled and
-  // breaks ESM resolution for JAVASCRIPT_ES/JSON/TYPESCRIPT_ES alike,
-  // since Super-Linter loads this single config file for all three).
+  ...jsonc.configs["flat/recommended-with-json"].map((config) => ({
+    ...config,
+    files: ["**/*.json"],
+  })),
 
-  ...jsonc.configs["flat/recommended-with-json"],
-  ...jsonc.configs["flat/recommended-with-json5"],
-  ...jsonc.configs["flat/recommended-with-jsonc"],
-
-  {
+  ...jsonc.configs["flat/recommended-with-jsonc"].map((config) => ({
+    ...config,
     files: ["**/*.jsonc"],
-    rules: {
-      "jsonc/no-comments": "off",
-    },
-  },
+  })),
+
+  ...jsonc.configs["flat/recommended-with-json5"].map((config) => ({
+    ...config,
+    files: ["**/*.json5"],
+  })),
 
   {
-    files: ["**/*.json5"],
+    files: ["**/*.jsonc", "**/*.json5"],
     rules: {
       "jsonc/no-comments": "off",
       "jsonc/quote-props": "off",
       "jsonc/comma-dangle": "off",
     },
   },
+
 ];
