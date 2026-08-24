@@ -1,5 +1,5 @@
 {
-  name: "example",
+  name: 'example',
   count: 1
   active: true
 }
