@@ -44,13 +44,4 @@ export default [
     files: ["**/*.json5"],
   })),
 
-  {
-    files: ["**/*.jsonc", "**/*.json5"],
-    rules: {
-      "jsonc/no-comments": "off",
-      "jsonc/quote-props": "off",
-      "jsonc/comma-dangle": "off",
-    },
-  },
-
 ];
